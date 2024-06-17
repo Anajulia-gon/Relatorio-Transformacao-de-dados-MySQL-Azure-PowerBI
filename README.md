@@ -70,7 +70,7 @@
 
 28. **Agrupe os Dados a Fim de Saber Quantos Colaboradores Existem por Gerente**
 
-    ![Adicionar imagem aqui](caminho/para/imagem.png)
+    ![Figura: Contagem de Colaboradores por Gerentes](https://github.com/Anajulia-gon/DashBoardCorporativo/blob/main/figura-contagem-de-colaboradores-por-gerentes.png)
 
 30. **Elimine as Colunas Desnecessárias**
     Elimine as colunas que não serão usadas no relatório de cada tabela.
