@@ -6,12 +6,12 @@ Este relatório detalha o processo de criação e manipulação de um banco de d
 
 ### Descrição – Processamento de Dados Simplificado com Power BI
 
-Etapas do Desafio
-1. **Criação de uma Instância MySQL no Azure
+Etapas do projeto
+1. ** Criação de uma Instância MySQL no Azure
 Foi provisionada uma instância MySQL na Azure para hospedar o banco de dados.
 
 Criação do Banco de Dados: A base de dados foi criada com a estrutura disponível no GitHub. Durante o processo, foram observadas diferenças na sintaxe em comparação ao tutorial da instrutora, como o uso de {} em vez de () na criação e inserção de tabelas. Além disso, ao adicionar registros de colaboradores, foi necessário inserir os chefes primeiro para garantir integridade referencial.
-2. **Integração do Power BI com MySQL no Azure
+2. ** Integração do Power BI com MySQL no Azure
 Para conectar o Power BI à instância MySQL na Azure, foi necessário:
 
 Download do Certificado SSL: Foi feito o download do certificado SSL do site DigiCert Root Certificates para estabelecer uma conexão segura entre o Power BI e o MySQL.
