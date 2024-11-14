@@ -1,96 +1,55 @@
-# DashBoard Corporativo
 
-## Criando Dashboard Corporativo com Integração com MySQL e Azure
+## Relatório de Projeto: Processamento de Dados Simplificado com Power BI
+Objetivo do Desafio
+Este relatório detalha o processo de criação e manipulação de um banco de dados e integração com o Power BI, utilizando uma instância MySQL no Azure, além de explorar transformações de dados para gerar relatórios e insights corporativos. 
 
-### Descrição do Desafio Módulo 3 – Processamento de Dados Simplificado com Power BI
 
-### Passos:
+### Descrição – Processamento de Dados Simplificado com Power BI
 
-1. **Criação de uma Instância na Azure para MySQL**
-   
-2. **Criar o Banco de Dados com Base Disponível no GitHub**
+Etapas do Desafio
+1. **Criação de uma Instância MySQL no Azure
+Foi provisionada uma instância MySQL na Azure para hospedar o banco de dados.
 
-   2.1. O banco de dados foi criado, mas houve divergências no processo em comparação ao da professora. A sintaxe de `{` mudou para `(` na criação e INSERT de tabelas. Além disso, ao inserir os colaboradores, foi necessário inserir os chefes em primeira análise.
+Criação do Banco de Dados: A base de dados foi criada com a estrutura disponível no GitHub. Durante o processo, foram observadas diferenças na sintaxe em comparação ao tutorial da instrutora, como o uso de {} em vez de () na criação e inserção de tabelas. Além disso, ao adicionar registros de colaboradores, foi necessário inserir os chefes primeiro para garantir integridade referencial.
+2. **Integração do Power BI com MySQL no Azure
+Para conectar o Power BI à instância MySQL na Azure, foi necessário:
 
-3. **Integração do Power BI com MySQL no Azure**
+Download do Certificado SSL: Foi feito o download do certificado SSL do site DigiCert Root Certificates para estabelecer uma conexão segura entre o Power BI e o MySQL.
+3. **Verificação e Transformação de Dados
+Foram identificados e solucionados problemas na base de dados para garantir consistência e integridade dos dados.
 
-   3.1. Foi necessário o download do arquivo SSL no site [DigiCert Root Certificates](https://www.digicert.com/kb/digicert-root-certificates.htm#roots).
+3.1. **Verificação dos Cabeçalhos e Tipos de Dados
+Tipos de Dados: Os IDs foram inicialmente tratados como texto em vez de números.
+Remoção de Colunas Irrelevantes: Colunas de metadados que não contribuem para a análise foram removidas.
+3.2. **Modificação de Valores Monetários
+A coluna de Salários foi convertida para o tipo "número decimal fixo" para garantir precisão nos cálculos financeiros.
+3.3. **Identificação e Tratamento de Valores Nulos
+Foi identificado um registro nulo na coluna Super_ssn da tabela employees, associado a um colaborador no departamento "Headquarters" com um alto salário. Concluímos que essa ausência de valor se justifica pela posição de gerência.
+Na coluna horas da tabela works_on, foi encontrado um valor zero para o colaborador James, previamente identificado como gerente (com Super_ssn nulo). Esse valor foi mantido, pois pode indicar que as horas de trabalho administrativo não são contabilizadas.
+3.4. **Verificação de Relações Hierárquicas
+Colaboradores sem Gerente: Apenas James não possui gerente, conforme esperado.
+Departamentos sem Gerente: Todos os departamentos possuem um gerente.
+4. **Transformação e Modelagem dos Dados
+4.1. **Separação de Colunas Complexas
+A coluna Address foi desmembrada em Número, Rua, Cidade e Estado (UF) para facilitar a análise.
 
-4. **Verificar Problemas na Base a Fim de Realizar a Transformação dos Dados**
+4.2. **Mesclagem de Dados entre Colaboradores e Departamentos
+Foi realizada uma junção entre as tabelas employee e department para associar cada colaborador ao seu respectivo departamento. A mesclagem foi baseada nas colunas Super_ssn (representando o gerente do colaborador) e Mgr_ssn (representando o gerente do departamento). As colunas irrelevantes foram removidas para simplificar a tabela final.
 
-### Diretrizes para Transformação dos Dados
+4.3. **Associações entre Colaboradores e Gerentes
+Os nomes dos gerentes foram associados aos colaboradores utilizando a mesclagem de consultas. Apenas os nomes "Primeiro" e "Último" dos gerentes foram mantidos, enquanto as demais colunas foram descartadas.
 
-1. **Verifique os Cabeçalhos e Tipos de Dados**
+4.4. **Concatenação de Colunas para Identificação Completa
+Para melhorar a identificação dos colaboradores:
 
-   1.1. IDs foram considerados, em primeira análise, como dados textuais e não numéricos.
+Foi criada uma nova coluna "Nome Completo" pela concatenação de Fname e Lname.
+4.5. **Criação de Identificadores de Departamentos por Localização
+Para apoiar um modelo estrela em uma futura análise, foi criada uma coluna única para combinar as informações de Department e Dlocation, unindo as tabelas Dept_location e Department com base no campo Dnumber.
 
-   1.2. Colunas de metadados foram removidas.
+Justificativa para o Uso de Mesclagem: Como ambas as tabelas compartilham a coluna Dnumber, a mesclagem foi possível e apropriada.
+5. **Agrupamento de Dados por Gerente
+Para análise de equipe, foi realizado o agrupamento dos dados para calcular o número de colaboradores sob responsabilidade de cada gerente.
 
-3. **Modifique os Valores Monetários para o Tipo Double Preciso**
-
-   3.1. A coluna Salários foi modificada para número decimal fixo.
-
-4. **Verifique a Existência dos Nulos e Analise a Remoção**
-
-   4.1. Elementos nulos foram encontrados em um membro da tabela de employees, mas tal fato é justificável por gerência. Pode-se afirmar isso conferindo o alto salário na coluna "Salários" e sua listagem no departamento "Headquarters", o que sugere uma gerência de instância superior.
-
-   4.2. Na base, pode ser encontrado um elemento zero na coluna horas da tabela works_on referente ao colaborador James, previamente encontrado nulo em Super_ssn. O zero não será alterado, pois pode significar que horas trabalhadas no cargo de gerência (administrativo) não são consideradas na tabela.
-
-6. **Os Employees com Nulos em Super_ssn Podem Ser os Gerentes. Verifique se Há Algum Colaborador Sem Gerente**
-
-   Não há colaboradores sem gerentes, exceto James, previamente mencionado.
-
-8. **Verifique se Há Algum Departamento Sem Gerente**
-
-   Não há.
-
-9. **Se Houver Departamento Sem Gerente, Suponha que Você Possui os Dados e Preencha as Lacunas**
-
-   Não há.
-
-10. **Verifique o Número de Horas dos Projetos**
-
-   Já previamente citado.
-
-11. **Separar Colunas Complexas**
-
-   Separado a coluna Address em número, rua, cidade e estado (UF).
-
-12. **Mesclar Consultas Employee e Department para Criar uma Tabela Employee com o Nome dos Departamentos Associados aos Colaboradores**
-
-    A mescla terá como base a tabela employee. Fique atento, essa informação influencia no tipo de junção.
-
-13. **Neste Processo Elimine as Colunas Desnecessárias**
-
-    Foi utilizada a junção por mescla a partir das colunas Super_ssn e Mgr_ssn, pois a primeira indica o gerente responsável pelo colaborador e a segunda o gerente responsável pelo departamento. Para detectar os departamentos dos colaboradores, a coluna que indica o gerente na tabela de colaboradores deverá indicar o gerente do respectivo departamento em que o colaborador atua. Demais colunas foram excluídas, já que a informação adicional desejada é apenas a coluna de departamento. É importante ressaltar que a opção "Mesclar consultas como novas" foi escolhida a fim de criar uma nova tabela.
-
-14. **Realize a Junção dos Colaboradores e Respectivos Nomes dos Gerentes**
-
-    Isso pode ser feito com consulta SQL ou pela mescla de tabelas com Power BI. Caso utilize SQL, especifique no README a query utilizada no processo.
-
-    Novamente, a opção "Mesclar consultas como novas" com as condições Super_ssn e ssn para linkar o nome dos gerentes aos colaboradores. Em relação à coluna employees, apenas foram adicionadas as colunas "First" e "Last" names dos gerentes; as demais foram descartadas.
-
-15. **Mescle as Colunas de Nome e Sobrenome para Ter Apenas uma Coluna Definindo os Nomes dos Colaboradores**
-
-    Para fazer esse processo, foram realizados os passos:
-    
-    1. Ir até a guia Adicionar Coluna (Add Column).
-    
-    2. Clicar em Coluna Personalizada (Custom Column).
-    
-    3. Dar um nome à nova coluna, como Nome Completo.
-    
-    4. Criar e inserir a Fórmula de Concatenação: `[Fname] & " " & [Lname]`.
-
-16. **Mescle os Nomes de Departamentos e Localização**
-
-    Isso fará que cada combinação departamento-local seja única, auxiliando na criação do modelo estrela em um módulo futuro.
-
-    Para fazer isso, uniremos as colunas Department e Dlocation, após a mescla das tabelas Dept_location e Department através das colunas Dnumber presente em ambas.
-
-17. **Explique por que, Neste Caso Supracitado, Podemos Apenas Utilizar o Mesclar e Não o Atribuir**
-
-    Podemos utilizar apenas o mesclar porque ambas as tabelas possuem o Dnumber que referencia o número do departamento em questão.
 
 18. **Agrupe os Dados a Fim de Saber Quantos Colaboradores Existem por Gerente**
 
@@ -99,3 +58,6 @@
 19. **Elimine as Colunas Desnecessárias**
 
     Elimine as colunas que não serão usadas no relatório de cada tabela.
+
+Conclusão
+O processo descrito acima permitiu organizar, transformar e integrar dados entre o MySQL no Azure e o Power BI, facilitando a análise e visualização de informações gerenciais. O desafio abordou diversas técnicas de manipulação de dados, como tratamento de nulos, padronização de tipos de dados, e mesclagem de tabelas, que foram essenciais para a criação de uma estrutura de dados robusta e consistente.
