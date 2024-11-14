@@ -1,5 +1,5 @@
 
-## Relatório de Projeto: Processamento de Dados Simplificado com Power BI
+## Relatório : Processamento de Dados Simplificado com Power BI
 Objetivo do Desafio
 Este relatório detalha o processo de criação e manipulação de um banco de dados e integração com o Power BI, utilizando uma instância MySQL no Azure, além de explorar transformações de dados para gerar relatórios e insights corporativos. 
 
@@ -52,17 +52,19 @@ Foi criada uma nova coluna "Nome Completo" pela concatenação de Fname e Lname.
 Para apoiar um modelo estrela em uma futura análise, foi criada uma coluna única para combinar as informações de Department e Dlocation, unindo as tabelas Dept_location e Department com base no campo Dnumber.
 
 Justificativa para o Uso de Mesclagem: Como ambas as tabelas compartilham a coluna Dnumber, a mesclagem foi possível e apropriada.
-5. **Agrupamento de Dados por Gerente** 
+5. **Eliminação as Colunas Desnecessárias**
+
+    Colunas que não se apresentaram relevantes para os possivies objetivos do DashBoard foram excluídos
+
+6. **Agrupamento de Dados por Gerente** 
 Para análise de equipe, foi realizado o agrupamento dos dados para calcular o número de colaboradores sob responsabilidade de cada gerente.
 
 
-18. **Agrupamento de Dados a Fim de Investigar Quantos Colaboradores Existem por Gerente (exemplo de insigths)]**
+7. **Agrupamento de Dados a Fim de Investigar Quantos Colaboradores Existem por Gerente (exemplo de insigths)]**
 
     ![Figura: Contagem de Colaboradores por Gerentes](https://github.com/Anajulia-gon/DashBoardCorporativo/blob/main/figura-contagem-de-colaboradores-por-gerentes.png)
 
-19. **Eliminação as Colunas Desnecessárias**
 
-    Elimine as colunas que não serão usadas no relatório de cada tabela.
 
 Conclusão
 O processo descrito acima permitiu organizar, transformar e integrar dados entre o MySQL no Azure e o Power BI, facilitando a análise e visualização de informações gerenciais. O desafio abordou diversas técnicas de manipulação de dados, como tratamento de nulos, padronização de tipos de dados, e mesclagem de tabelas, que foram essenciais para a criação de uma estrutura de dados robusta e consistente.
