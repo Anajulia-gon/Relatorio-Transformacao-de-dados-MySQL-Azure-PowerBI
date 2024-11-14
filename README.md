@@ -66,5 +66,5 @@ Para análise de equipe, foi realizado o agrupamento dos dados para calcular o n
 
 
 
-Conclusão
+##  Conclusão
 O processo descrito acima permitiu organizar, transformar e integrar dados entre o MySQL no Azure e o Power BI, facilitando a análise e visualização de informações gerenciais. O desafio abordou diversas técnicas de manipulação de dados, como tratamento de nulos, padronização de tipos de dados, e mesclagem de tabelas, que foram essenciais para a criação de uma estrutura de dados robusta e consistente.
