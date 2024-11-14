@@ -11,6 +11,7 @@ Etapas do projeto
 Foi provisionada uma instância MySQL na Azure para hospedar o banco de dados.
 
 Criação do Banco de Dados: A base de dados foi criada com a estrutura disponível no GitHub. Durante o processo, foram observadas diferenças na sintaxe em comparação ao tutorial da instrutora, como o uso de {} em vez de () na criação e inserção de tabelas. Além disso, ao adicionar registros de colaboradores, foi necessário inserir os chefes primeiro para garantir integridade referencial.
+
 2. **Integração do Power BI com MySQL no Azure**
 Para conectar o Power BI à instância MySQL na Azure, foi necessário:
 
@@ -66,5 +67,5 @@ Para análise de equipe, foi realizado o agrupamento dos dados para calcular o n
 
 
 
-##  Conclusão
+###  Conclusão
 O processo descrito acima permitiu organizar, transformar e integrar dados entre o MySQL no Azure e o Power BI, facilitando a análise e visualização de informações gerenciais. O desafio abordou diversas técnicas de manipulação de dados, como tratamento de nulos, padronização de tipos de dados, e mesclagem de tabelas, que foram essenciais para a criação de uma estrutura de dados robusta e consistente.
